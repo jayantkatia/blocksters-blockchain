@@ -2,19 +2,19 @@
   "$schema": "https://github.com/softwaremill/fablo/releases/download/1.0.0/schema.json",
   "global": {
     "fabricVersion": "2.4.0",
-    "tls": false
+    "tls": true
   },
   "orgs": [
     {
       "organization": {
         "name": "Orderer",
-        "domain": "orderer.example.com"
+        "domain": "orderer.aicte.com"
       },
       "orderers": [
         {
           "groupName": "group1",
-          "type": "solo",
-          "instances": 1
+          "type": "raft",
+          "instances": 3
         }
       ],
       "tools": {
@@ -23,11 +23,24 @@
     },
     {
       "organization": {
-        "name": "Org1",
-        "domain": "org1.example.com"
+        "name": "AICTE",
+        "domain": "aicte.aicte.com"
       },
       "peer": {
-        "instances": 2,
+        "instances": 3,
+        "db": "LevelDb"
+      },
+      "tools": {
+        "fabloRest": true
+      }
+    },
+    {
+      "organization": {
+        "name": "Thapar",
+        "domain": "thapar.aicte.com"
+      },
+      "peer": {
+        "instances": 3,
         "db": "LevelDb"
       },
       "tools": {
@@ -37,13 +50,22 @@
   ],
   "channels": [
     {
-      "name": "my-channel1",
+      "name": "common-channel",
       "orgs": [
         {
-          "name": "Org1",
+          "name": "AICTE",
           "peers": [
             "peer0",
-            "peer1"
+            "peer1",
+            "peer2"
+          ]
+        },
+        {
+          "name": "Thapar",
+          "peers": [
+            "peer0",
+            "peer1",
+            "peer2"
           ]
         }
       ]
@@ -54,7 +76,7 @@
       "name": "chaincode1",
       "version": "0.0.1",
       "lang": "node",
-      "channel": "my-channel1",
+      "channel": "common-channel",
       "directory": "./chaincodes/chaincode-kv-node"
     }
   ]
