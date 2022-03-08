@@ -9,7 +9,7 @@
 ```
 sudo apt-get install build-essential curl wget golang python nodejs docker docker-compose jq
 ```
-3. Run, according to [this](https://github.com/microsoft/WSL/discussions/4872#discussioncomment-99164)
+3. According to [this](https://github.com/microsoft/WSL/discussions/4872#discussioncomment-99164), Run
 ```
 sudo touch /etc/fstab
 sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
@@ -20,3 +20,8 @@ service docker status
 4. Run ```curl -sSL https://bit.ly/2ysbOFE | bash -s```
 5. Add ```export PATH="<path_to_3rd_step_downloaded_directory_bin>:$PATH"``` to ```~/.bashrc``` file at the bottom.
 6. Git clone this repo, ```cd``` into it and run ```./fablo up``` 
+
+## Development
+
+1. Up the network using ```./fablo up```
+2. After changing fablo-config.json, run ```./fablo recreate```
